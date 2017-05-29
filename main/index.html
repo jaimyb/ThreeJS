@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page Title</title>
+		<script type="text/javascript" src="js/three.min.js"></script>
+		<script type="text/javascript" src="js/OrbitControls.js"></script>
+		<style type="text/css" src="css/StyleSheet.css"></style>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var light = new THREE.DirectionalLight( 0xffffff );
+			light.position.set( 0, 300, 1 ).normalize();
+			scene.add(light);
+
+			var controls = new THREE.OrbitControls( camera, renderer.domElement );
+			
+    		cube = new THREE.Mesh( new THREE.CubeGeometry( 200, 200, 200 ), new THREE.MeshPhongMaterial());
+			//cube.position.y = 0;
+			scene.add(cube);
+
+			camera.position.set(200,0,200);
+
+    		function render() {
+    			renderer.render(scene, camera);
+    			requestAnimationFrame(render);
+			}
+
+			render();
+		</script>
+
+	</body>
+</html>
