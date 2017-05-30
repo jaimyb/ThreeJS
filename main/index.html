@@ -11,11 +11,13 @@
 		<script type="text/javascript">
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
-
+			var loader = new THREE.FontLoader();
 
 			var renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
+
+			
 
 			var light = new THREE.DirectionalLight( 0xffffff );
 			light.position.set( 0, 300, 1 ).normalize();
@@ -23,11 +25,25 @@
 
 			var controls = new THREE.OrbitControls( camera, renderer.domElement );
 			
-    		cube = new THREE.Mesh( new THREE.CubeGeometry( 200, 200, 200 ), new THREE.MeshPhongMaterial());
+    		//cube = new THREE.Mesh( new THREE.CubeGeometry( 200, 200, 200 ), new THREE.MeshNormalMaterial());
 			//cube.position.y = 0;
-			scene.add(cube);
+			///scene.add(cube);
 
-			camera.position.set(200,0,200);
+			loader.load('file://C:/Users/Jaimy/Documents/GitHub/ThreeJS/main/js/DS-Digital_Bold.json');
+
+			var material = new THREE.MeshPhongMaterial({
+        		color: 0xdddddd
+    		});
+    		var textGeom = new THREE.TextGeometry( 'Hello World!', {
+        		font: 'ds-digital' // Must be lowercase!
+    		});
+    		var textMesh = new THREE.Mesh( textGeom, material );
+
+    		scene.add( textMesh );
+
+    		console.log(camera.position.x,camera.position.y,camera.position.z);
+
+
 
     		function render() {
     			renderer.render(scene, camera);
